@@ -113,6 +113,37 @@ def main():
                 cr.line_to(layer[i][0], layer[i][1])
             cr.fill()
 
+    for p in range(-int(height*.2), int(height*1.2), 60):
+        cr.set_source_rgba(0, 0, 0, shapealpha)
+
+        shape = octagon(random.randint(-100, width+100), p, random.randint(100, 300))
+        baseshape = deform(shape, basedeforms, initial)
+
+        # for j in range(random.randint(minshapes, maxshapes)):
+        for j in range(20):
+            tempshape = copy.deepcopy(baseshape)
+            layer = deform(tempshape, finaldeforms, deviation)
+
+            for i in range(len(layer)):
+                cr.line_to(layer[i][0], layer[i][1])
+            cr.fill()
+            
+    # add black here?
+    for p in range(-int(height*.2), int(height*1.2), 60):
+        cr.set_source_rgba(0, 0, 0, shapealpha)
+
+        shape = octagon(random.randint(-100, width+100), p, random.randint(100, 300))
+        baseshape = deform(shape, 0, 0)
+
+        # for j in range(random.randint(minshapes, maxshapes)):
+        for j in range(2):
+            tempshape = copy.deepcopy(baseshape)
+            layer = deform(tempshape, finaldeforms, deviation)
+
+            for i in range(len(layer)):
+                cr.line_to(layer[i][0], layer[i][1])
+            cr.fill()
+    
     ims.write_to_png('Examples/nebula' + '.png')
 
 if __name__ == "__main__":
