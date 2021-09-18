@@ -1,5 +1,6 @@
   
 import cairo, sys, argparse, copy, math, random
+from planets import planet
 
 def make_nebula():
 
@@ -9,11 +10,11 @@ def make_nebula():
     # for x in range(10):
     #     colors.append((0,0,0))
     for i in range(15):
-        colors.append((float_gen(.1, 1.3), float_gen(.1, .5), float_gen(.1, 1.3)))
+        colors.append((float_gen(.1, 1.7), float_gen(.1, .5), float_gen(.1, 1.7)))
         colors.append((0, 0, 0))
 
     def octagon(x_orig, y_orig, side):
-        side = side * random.randint(1, 3)
+        side = side * 5
         x = x_orig
         y = y_orig
         d = side / math.sqrt(2)
@@ -69,8 +70,8 @@ def make_nebula():
         parser.add_argument("-bd", "--basedeforms", default=1, type=int)
         parser.add_argument("-fd", "--finaldeforms", default=3, type=int)
         parser.add_argument("-mins", "--minshapes", default=1, type=int)
-        parser.add_argument("-maxs", "--maxshapes", default=200, type=int)
-        parser.add_argument("-sa", "--shapealpha", default=.0045, type=float)
+        parser.add_argument("-maxs", "--maxshapes", default=30, type=int)
+        parser.add_argument("-sa", "--shapealpha", default=.004, type=float)
         # parser.add_argument("--mult", default=random.randint(1, 5), type=range)
         args = parser.parse_args()
 
@@ -108,6 +109,25 @@ def make_nebula():
         
 
         cr.set_line_width(1)
+        white = 300
+        yellow = 60
+        blue = 20
+        for x in range(0, white):
+        # x, y, radius, angle1, angle2
+            cr.arc(random.randint(0, width), random.randint(
+                0, height), random.uniform(.1, 5), 0, 2*math.pi)
+            cr.set_source_rgb(255, 255, 255)
+            cr.fill()
+        for x in range(0, yellow):
+            cr.arc(random.randint(0, width), random.randint(
+                0, height), random.uniform(.1, 5), 0, 2*math.pi)
+            cr.set_source_rgb(1, 198/255, 127/255)
+            cr.fill()
+        for x in range(0, blue):
+            cr.arc(random.randint(0, width), random.randint(
+                0, height), random.uniform(.1, 5), 0, 2*math.pi)
+            cr.set_source_rgb(167/255, 188/255, 1)
+            cr.fill()
 
         for p in range(-int((height*.2)/3), int((height*1.2)/3), 80):
             cr.set_source_rgba(random.choice(colors)[0], random.choice(colors)[1], random.choice(colors)[2], shapealpha)
@@ -142,8 +162,8 @@ def make_nebula():
         #             cr.line_to(layer[i][0], layer[i][1])
         #         cr.fill()
 
-        
-        ims.write_to_png('Examples/nebula' + '.png')
+        planet()
+        # ims.write_to_png('Examples/nebula' + '.png')
 
     if __name__ == "__main__":
         main()
