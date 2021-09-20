@@ -174,3 +174,4 @@ def planet():
 
     if __name__ == "__main__":
         main()
+planet()

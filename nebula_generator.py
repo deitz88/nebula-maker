@@ -84,16 +84,6 @@ def make_nebula():
 
         minshapes = args.minshapes
         maxshapes = args.maxshapes
-        # mult = args.mult
-        
-        # if mult == 1:
-        #     multi = (random.randint(width, width+500), 1.9)
-        # elif mult == 2:
-        #     multi = (1.5, 9)
-        # elif mult == 3:
-        #     multi = (.9, 1.2)
-        # elif mult == 4:
-        #     multi = (.4, .8)
             
         shapealpha = args.shapealpha
 
@@ -102,9 +92,7 @@ def make_nebula():
 
         # background black
         cr.set_source_rgb(0, 0, 0)
-        # cr.rectangle(0, 0, width*3, height*3)
         cr.rectangle(0, 0, width, height)
-        
         cr.fill()
         
 
@@ -132,8 +120,6 @@ def make_nebula():
         for p in range(-int((height*.2)/3), int((height*1.2)/3), 80):
             cr.set_source_rgba(random.choice(colors)[0], random.choice(colors)[1], random.choice(colors)[2], shapealpha)
 
-            # shape = octagon(random.randint(-100, width+100), p, random.randint(100, 300))0
-            # shape = octagon(random.randint(width*.9, width*1.4), p, random.randint(100, 300))
             shape = octagon(random.randint(width*.3, width*.8), random.randint(1, height), random.randint(4, 30))
             
             baseshape = deform(shape, basedeforms, initial)
@@ -163,7 +149,7 @@ def make_nebula():
         #         cr.fill()
 
         planet()
-        # ims.write_to_png('Examples/nebula' + '.png')
+        ims.write_to_png('Examples/nebula' + '.png')
 
     if __name__ == "__main__":
         main()
